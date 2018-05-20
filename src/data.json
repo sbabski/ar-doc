@@ -1,0 +1,23 @@
+{
+	"map": "img.jpg",
+	"videos": [
+		{
+			"type": "local",
+			"url": "v1.mp4",
+			"icon": "star.png",
+			"pos": [400, 800]
+		},
+		{
+			"type": "youtube",
+			"url": "https://www.youtube.com/watch?v=ZY3J3Y_OU0w",
+			"icon": "star.png",
+			"pos": [650, 200]
+		},
+		{
+			"type": "vimeo",
+			"url": "https://vimeo.com/17959396",
+			"icon": "star.png",
+			"pos": [700, 400]
+		}
+	]
+}
