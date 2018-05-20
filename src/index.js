@@ -10,35 +10,49 @@ class App extends React.Component {
     this.state = {
       mapUrl: data['map'],
       vidList: data['videos'],
-      videoPlaying: false
+      videoPlaying: false,
+      offset: [0, 0],
+      ratio: 1
     }
     this.mapRef = React.createRef();
   }
 
   componentDidMount() {
-    //console.log(ReactDOM.findDOMNode(this.mapRef.current));
-    //console.log(ReactDOM.findDOMNode(this.mapRef.current).getBoundingClientRect().width);
-    const w = ReactDOM.findDOMNode(this.mapRef.current).getBoundingClientRect();
-    console.log(w);
-    console.log(ReactDOM.findDOMNode(this.mapRef.current).offsetWidth);
+    window.addEventListener('resize', this.handleWindowResize.bind(this));
+    setTimeout(this.handleWindowResize.bind(this), 1);
   }
 
   handleOpenClick(v) {
     this.setState({videoPlaying: v})
   }
 
+  handleWindowResize() {
+    const m = this.mapRef.current;
+    const r = this.mapRef.current.getBoundingClientRect();
+    console.log("test " + r.height / m.naturalHeight);
+    this.setState({
+      offset: [r.left, r.top],
+      ratio: r.width / m.naturalWidth
+    });
+  }
+
   render() {
     const videos = this.state.vidList.map((vData, index) => {
       let url = vData['url'];
-      //let icon = require('/.media/' + vData['icon']);
       if(vData['type'] === 'local') url = require('./media/' + url);
+      //let icon = require('/.media/' + vData['icon']);
+      let pos = vData['pos'].map((v, i) => {
+        return v * this.state.ratio + this.state.offset[i];
+        //return x * this.state.offset[i * 2] + this.state.offset[i * 2 + 1];
+      });
+
       return(
         <VideoPlayer
           key={'video' + index}
           id={'video' + index}
           url={url}
           icon={vData['icon']}
-          pos={vData['pos']}
+          pos={pos}
           onClick={v => this.handleOpenClick(v)}
           anyVideoPlaying={this.state.videoPlaying}
         />

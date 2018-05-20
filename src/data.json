@@ -5,19 +5,19 @@
 			"type": "local",
 			"url": "v1.mp4",
 			"icon": "star.png",
-			"pos": [400, 800]
+			"pos": [5310, 2100]
 		},
 		{
 			"type": "youtube",
 			"url": "https://www.youtube.com/watch?v=ZY3J3Y_OU0w",
 			"icon": "star.png",
-			"pos": [650, 200]
+			"pos": [2350, 1200]
 		},
 		{
 			"type": "vimeo",
 			"url": "https://vimeo.com/17959396",
 			"icon": "star.png",
-			"pos": [700, 400]
+			"pos": [1150, 2680]
 		}
 	]
 }

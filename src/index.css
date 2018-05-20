@@ -38,8 +38,7 @@ html, body {
 }
 
 .video-open {
-  line-height: 0;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
 }
 
 .video-open img {
