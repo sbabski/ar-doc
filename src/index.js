@@ -1,130 +1,108 @@
+/*import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+
+
+
+ReactDOM.render(
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
+    , document.getElementById('root'));*/
+
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 import './index.css';
-import data from './data.json'
-import ReactPlayer from 'react-player';
+import Map from './Map';
+import chevron from './chevron.png';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mapUrl: data['map'],
-      vidList: data['videos'],
-      videoPlaying: false,
-      offset: [0, 0],
-      ratio: 1
-    }
-    this.mapRef = React.createRef();
-  }
-
-  componentDidMount() {
-    window.addEventListener('resize', this.handleWindowResize.bind(this));
-    setTimeout(this.handleWindowResize.bind(this), 1);
-  }
-
-  handleOpenClick(v) {
-    this.setState({videoPlaying: v})
-  }
-
-  handleWindowResize() {
-    const m = this.mapRef.current;
-    const r = this.mapRef.current.getBoundingClientRect();
-    console.log("test " + r.height / m.naturalHeight);
-    this.setState({
-      offset: [r.left, r.top],
-      ratio: r.width / m.naturalWidth
-    });
-  }
-
-  render() {
-    const videos = this.state.vidList.map((vData, index) => {
-      let url = vData['url'];
-      if(vData['type'] === 'local') url = require('./media/' + url);
-      //let icon = require('/.media/' + vData['icon']);
-      let pos = vData['pos'].map((v, i) => {
-        return v * this.state.ratio + this.state.offset[i];
-        //return x * this.state.offset[i * 2] + this.state.offset[i * 2 + 1];
-      });
-
-      return(
-        <VideoPlayer
-          key={'video' + index}
-          id={'video' + index}
-          url={url}
-          icon={vData['icon']}
-          pos={pos}
-          onClick={v => this.handleOpenClick(v)}
-          anyVideoPlaying={this.state.videoPlaying}
-        />
-      );
-    });
-
-    return (
-      <div>
-        <div id="map">
-          <img ref={this.mapRef} src={require('./media/' + this.state.mapUrl)} alt="" />
-        </div>
-        {videos}
-      </div>
-    );
-  }
-}
-
-class VideoPlayer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      visible: false,
-      anyVideoPlaying: false
-    }
-    this.formatPos = this.formatPos.bind(this);
-  }
-
-  handleOpenClick(v) {
-    this.setState({visible: v});
-    this.props.onClick(v);
-  }
-
-  formatPos() {
-    return {
-      left: this.props.pos[0] + 'px',
-      top: this.props.pos[1] + 'px'
+      data: this.importAll(require.context('./data', false, /\.json$/))
     };
   }
 
+  importAll(r) {
+    const mapped = r.keys().map(r);
+    var dict = {};
+    mapped.map((x) => {
+      const id = x['id'];
+      //delete x['id'];
+      dict[id] = x;
+      return x;
+    });
+
+    return dict;
+  }
+
+  renderChevron(pos, rev=false) {
+    const lower = pos.toLowerCase();
+    const text = <p>{pos}</p>;
+    const img = <img src={chevron} alt={lower}/>;
+
+    return(
+      <div className={"chevron " + lower}>
+        {rev ? img : text}
+        {rev ? text : img}
+      </div>
+    );
+  }
 
   render() {
-    let vidClass = "fullscreen-video";
-    let openClass = "video-open";
+    const d = this.state.data;
+    /*const maps = Object.keys(d).map(function(key, index) {
+      return(
+        <Map
+          key={'map-' + key}
+          data={d[key]}
+        />
+      );
+    });*/
 
-    if(!this.state.visible) vidClass += " hidden";
-    if(this.props.anyVideoPlaying) openClass += " hidden";
+    const MasterMap = () => (
+      <Map
+        key={'map-p1'}
+        data={d['p1']}
+      />
+    );
 
-    return (
-      <div id={this.props.id} className="video-container">
-        <div 
-          className={openClass} 
-          onClick={() => this.handleOpenClick(true)}
-          style={this.formatPos()}>
-          <img src={require('./media/' + this.props.icon)} alt="X"/>
-        </div>
-        <div className={vidClass}>
-          <ReactPlayer
-            url={this.props.url}
-            width='100vw'
-            height='100vh'
-            playing={this.state.visible}
-            controls={true}
+    const MapFinder = ({match}) => (
+      <Map
+        key={'map-' + match.params.name}
+        data={d[match.params.name]}
+      />
+    );
+
+    return(
+      <div>
+        <Switch>
+          <Route 
+            exact path="/" 
+            component={MasterMap}
           />
-          <div className="close" onClick={() => this.handleOpenClick(false)}>X</div>
+          <Route 
+            path="/:name" 
+            //render={({match}) => <div>{d[match.params.name]['id']}</div>}
+            component={MapFinder}
+          />
+        </Switch>
+        <div id="nav">
+          {this.renderChevron("Prev")}
+          {this.renderChevron("Next")}
+          {this.renderChevron("Home", true)}
         </div>
       </div>
     );
   }
 }
-// ========================================
 
 ReactDOM.render(
-  <App />,
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
   document.getElementById('root')
 );
