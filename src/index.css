@@ -123,5 +123,11 @@ html, body {
 .master p {
   margin: 0;
   font-size: 0.5em;
+  transition: opacity 0.25s;
+  opacity: 0;
 }
 
+
+.master:hover p {
+  opacity: 1;
+}

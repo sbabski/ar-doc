@@ -48,7 +48,9 @@ class MasterMap extends React.Component {
           className='video-open master'
           style={this.formatPos(pos)}>
           <img src={icon} alt="X"/>
-          <p class="test-text">test</p>
+          <p>
+            {vData['name']}
+          </p>
       </Link>
     );
   }
