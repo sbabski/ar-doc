@@ -1,24 +1,25 @@
 {
 	"id": "p1",
+	"name": "Abernathy",
 	"map": "map_1894.jpg",
 	"videos": [
 		{
 			"type": "local",
 			"url": "v1.mp4",
 			"icon": "star.png",
-			"pos": [5310, 2100]
+			"pos": [100, 100]
 		},
 		{
 			"type": "youtube",
 			"url": "https://www.youtube.com/watch?v=ZY3J3Y_OU0w",
 			"icon": "star.png",
-			"pos": [2350, 1200]
+			"pos": [500, 650]
 		},
 		{
 			"type": "vimeo",
 			"url": "https://vimeo.com/17959396",
 			"icon": "star.png",
-			"pos": [1150, 2680]
+			"pos": [1000, 200]
 		}
 	]
 }

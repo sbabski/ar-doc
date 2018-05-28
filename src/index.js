@@ -1,37 +1,26 @@
-/*import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App';
-
-
-
-ReactDOM.render(
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>
-    , document.getElementById('root'));*/
-
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Switch, Redirect } from 'react-router-dom';
 import './index.css';
 import Map from './Map';
+import MasterMap from './MasterMap';
 import chevron from './chevron.png';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+    const data = this.importAll(require.context('./data', false, /\.json$/));
     this.state = {
-      data: this.importAll(require.context('./data', false, /\.json$/))
+      data: data,
+      dataList: this.createDataList(data)
     };
   }
 
   importAll(r) {
     const mapped = r.keys().map(r);
     var dict = {};
-    mapped.map((x) => {
+    mapped.map((x, i) => {
       const id = x['id'];
-      //delete x['id'];
       dict[id] = x;
       return x;
     });
@@ -39,6 +28,62 @@ class App extends React.Component {
     return dict;
   }
 
+  createDataList(data) {
+    const list = Object.keys(data);
+    const len = list.length;
+
+    for(var i = 0; i < len; i++) {
+      const d = data[list[i]];
+      d['next'] = list[(i + 1) % len];
+      d['prev'] = list[((i - 1) + len) % len];
+    }
+    return list;
+  }
+
+  render() {
+    const d = this.state.data;
+    const dL = this.state.dataList;
+
+    return(
+      <div>
+        <Switch>
+          <Route 
+            exact path="/"
+            render={() =>
+              <div>
+                <MasterMap
+                  globalData={d}
+                />
+                <Chevrons 
+                  next={dL[0]}
+                  prev={dL[dL.length - 1]}
+                  home={false}
+                />
+              </div>
+            }
+          />
+          <Route 
+            path="/:name" 
+            render={({match}) =>
+              <div>
+                <MapFinder
+                  data={d[match.params.name]}
+                />
+                <Chevrons 
+                  next={d[match.params.name]['next']}
+                  prev={d[match.params.name]['prev']}
+                  home={true}
+                />
+              </div>
+            }
+          />
+        </Switch>
+      </div>
+    );
+  }
+}
+
+class Chevrons extends React.Component {
   renderChevron(pos, rev=false) {
     const lower = pos.toLowerCase();
     const text = <p>{pos}</p>;
@@ -53,50 +98,28 @@ class App extends React.Component {
   }
 
   render() {
-    const d = this.state.data;
-    /*const maps = Object.keys(d).map(function(key, index) {
-      return(
-        <Map
-          key={'map-' + key}
-          data={d[key]}
-        />
-      );
-    });*/
-
-    const MasterMap = () => (
-      <Map
-        key={'map-p1'}
-        data={d['p1']}
-      />
-    );
-
-    const MapFinder = ({match}) => (
-      <Map
-        key={'map-' + match.params.name}
-        data={d[match.params.name]}
-      />
-    );
-
     return(
-      <div>
-        <Switch>
-          <Route 
-            exact path="/" 
-            component={MasterMap}
-          />
-          <Route 
-            path="/:name" 
-            //render={({match}) => <div>{d[match.params.name]['id']}</div>}
-            component={MapFinder}
-          />
-        </Switch>
-        <div id="nav">
-          {this.renderChevron("Prev")}
-          {this.renderChevron("Next")}
-          {this.renderChevron("Home", true)}
-        </div>
+      <div id="nav">
+        <Link to={"/" + this.props.prev}>{this.renderChevron("Prev")}</Link>
+        <Link to={"/" + this.props.next}>{this.renderChevron("Next")}</Link>
+        {this.props.home && <Link to="/">{this.renderChevron("Home", true)}</Link>}
       </div>
     );
+  }
+}
+
+class MapFinder extends React.Component {
+  render() {
+    if(this.props.data === undefined) {
+      return(<Redirect to="/"/>);
+    } else {
+      return(
+        <Map
+          key={this.props.data['id']}
+          data={this.props.data}
+        />
+      );
+    }
   }
 }
 

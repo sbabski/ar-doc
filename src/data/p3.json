@@ -1,0 +1,25 @@
+{
+	"id": "p3",
+	"name": "Cooper",
+	"map": "img.jpg",
+	"videos": [
+		{
+			"type": "link",
+			"url": "https://web.northeastern.edu/ar-doc/",
+			"icon": "star.png",
+			"pos": [5310, 2100]
+		},
+		{
+			"type": "youtube",
+			"url": "https://www.youtube.com/watch?v=ZY3J3Y_OU0w",
+			"icon": "star.png",
+			"pos": [2350, 1200]
+		},
+		{
+			"type": "vimeo",
+			"url": "https://vimeo.com/17959396",
+			"icon": "star.png",
+			"pos": [1150, 2680]
+		}
+	]
+}

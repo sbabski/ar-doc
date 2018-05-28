@@ -5,10 +5,8 @@ class VideoPlayer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: false,
-      anyVideoPlaying: false
+      visible: false
     }
-    this.formatPos = this.formatPos.bind(this);
   }
 
   handleOpenClick(v) {
@@ -32,7 +30,7 @@ class VideoPlayer extends React.Component {
     if(this.props.anyVideoPlaying) openClass += " hidden";
 
     return (
-      <div id={this.props.id} className="video-container">
+      <div id={this.props.id}>
         <div 
           className={openClass} 
           onClick={() => this.handleOpenClick(true)}

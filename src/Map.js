@@ -1,10 +1,10 @@
 import React from 'react';
 import VideoPlayer from './VideoPlayer';
+import MapLink from './MapLink';
 
 class Map extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.data);
     this.state = {
       mapUrl: this.props.data['map'],
       vidList: this.props.data['videos'],
@@ -34,26 +34,56 @@ class Map extends React.Component {
     });
   }
 
+  renderLink(vData, index, url) {
+    let icon = require('./data' + this.state.id + vData['icon']);
+    let pos = vData['pos'].map((v, i) => {
+      return v * this.state.ratio + this.state.offset[i];
+    });
+
+    return(
+      <MapLink
+        key={'link' + index}
+        id={'link' + index}
+        url={url}
+        icon={icon}
+        pos={pos}
+        newPage={true}
+        anyVideoPlaying={this.state.videoPlaying}
+      />
+    );
+  }
+
+  renderVideoPlayer(vData, index, url) {
+    let icon = require('./data' + this.state.id + vData['icon']);
+    let pos = vData['pos'].map((v, i) => {
+      return v * this.state.ratio + this.state.offset[i];
+    });
+
+    return(
+      <VideoPlayer
+        key={'video' + index}
+        id={'video' + index}
+        url={url}
+        icon={icon}
+        pos={pos}
+        onClick={v => this.handleOpenClick(v)}
+        anyVideoPlaying={this.state.videoPlaying}
+      />
+    );
+  }
+
   render() {
     const videos = this.state.vidList.map((vData, index) => {
       let url = vData['url'];
-      if(vData['type'] === 'local') url = require('./data' + this.state.id + url);
-      let icon = require('./data' + this.state.id + vData['icon']);
-      let pos = vData['pos'].map((v, i) => {
-        return v * this.state.ratio + this.state.offset[i];
-      });
 
-      return(
-        <VideoPlayer
-          key={'video' + index}
-          id={'video' + index}
-          url={url}
-          icon={icon}
-          pos={pos}
-          onClick={v => this.handleOpenClick(v)}
-          anyVideoPlaying={this.state.videoPlaying}
-        />
-      );
+      switch(vData['type']) {
+        case 'link':
+          return this.renderLink(vData, index, url);
+        case 'local':
+          url = require('./data' + this.state.id + url);
+        default:
+          return this.renderVideoPlayer(vData, index, url);
+      }
     });
 
     return (

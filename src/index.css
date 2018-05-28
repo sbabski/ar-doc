@@ -40,6 +40,7 @@ html, body {
 
 .video-open {
   transform: translate(-50%, -50%);
+  line-height: 0;
 }
 
 .video-open img {
@@ -65,7 +66,6 @@ html, body {
   margin: 1em;
   position:absolute;
   width: 3em;
-  cursor: pointer;
 }
 
 .chevron.prev {
@@ -83,10 +83,15 @@ html, body {
   left: 0;
 }
 
-.chevron p {
+.chevron p, .master p {
   text-align: center;
   font-weight: bold;
+  color: black;
+}
+
+.chevron p {
   margin: 0.5em 0;
+  transition: opacity 0.25s;
   opacity: 0;
 }
 
@@ -109,5 +114,14 @@ html, body {
 
 .chevron.home img {
   transform: rotate(90deg);
+}
+
+.master {
+  text-decoration: none;
+}
+
+.master p {
+  margin: 0;
+  font-size: 0.5em;
 }
 

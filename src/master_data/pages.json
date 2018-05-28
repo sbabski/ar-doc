@@ -1,0 +1,27 @@
+{
+	"id": "master",
+	"map": "map_1894.jpg",
+	"links": [
+		{
+			"type": "link",
+			"url": "p1",
+			"name": "Abernathy",
+			"icon": "star.png",
+			"pos": [100, 100]
+		},
+		{
+			"type": "link",
+			"url": "p2",
+			"name": "Bernard",
+			"icon": "star.png",
+			"pos": [500, 650]
+		},
+		{
+			"type": "link",
+			"url": "p3",
+			"name": "Cooper",
+			"icon": "star.png",
+			"pos": [530, 250]
+		}
+	]
+}
