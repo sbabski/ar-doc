@@ -85,12 +85,7 @@ html, body {
 .chevron p, .master p {
   text-align: center;
   font-weight: bold;
-  color: #999;
-  text-shadow:
-    -1px -1px 0 #000,  
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000;
+  color: black;
 }
 
 .chevron p {
@@ -131,7 +126,7 @@ html, body {
 }
 
 .master p {
-  font-size: 0.5em;
+  font-size: 0.4em;
   transition: opacity 0.25s;
   opacity: 0;
   margin: 0.5em;
@@ -155,21 +150,3 @@ html, body {
   from {transform: translateY(0px);}
   to {transform: translateY(-5px);}
 }
-
-/*
-.master {
-  text-decoration: none;
-}
-
-.master p {
-  margin: 0;
-  font-size: 0.5em;
-  transition: opacity 0.25s;
-  opacity: 0;
-}
-
-.master:hover p {
-  opacity: 1;
-}
-
-*/
