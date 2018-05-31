@@ -1,7 +1,7 @@
 html, body {
   margin: 0;
   height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
   font-family: sans-serif;
   color: #666
 }
@@ -149,4 +149,11 @@ html, body {
 @keyframes bounce {
   from {transform: translateY(0px);}
   to {transform: translateY(-5px);}
+}
+
+
+@media only screen and (max-width: 768px) {
+  #map img {
+    margin-top: 3em;
+  }
 }

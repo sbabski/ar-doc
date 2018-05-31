@@ -11,23 +11,29 @@ class MasterMap extends React.Component {
       linkList: data['links'],
       id: '/' + data['id'] + '/',
       offset: [0, 0],
-      ratio: 1
+      ratio: 1,
+      resize: false
     }
     this.mapRef = React.createRef();
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.handleWindowResize.bind(this));
+    if(!this.state.resize) {
+      window.addEventListener('resize', this.handleWindowResize.bind(this));
+      this.setState({resize: true});
+    }
     setTimeout(this.handleWindowResize.bind(this), 1);
   }
 
   handleWindowResize() {
     const m = this.mapRef.current;
-    const r = m.getBoundingClientRect();
-    this.setState({
-      offset: [r.left, r.top],
-      ratio: r.width / m.naturalWidth
-    });
+    if(m != null) {
+      const r = m.getBoundingClientRect();
+      this.setState({
+        offset: [r.left, r.top],
+        ratio: r.width / m.naturalWidth
+      });
+    }
   }
 
   formatPos(pos) {

@@ -12,14 +12,24 @@ class Map extends React.Component {
       id: '/' + this.props.data['id'] + '/',
       videoPlaying: false,
       offset: [0, 0],
-      ratio: 1
+      ratio: 1,
+      resize: false
     }
     this.mapRef = React.createRef();
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.handleWindowResize.bind(this));
-    setTimeout(this.handleWindowResize.bind(this), 1);
+    if(!this.state.resize) {
+      window.addEventListener('resize', this.handleWindowResize.bind(this));
+      this.setState({resize: true});
+    }
+    for(var i = 0; i < 10; i++) {
+      setTimeout(this.handleWindowResize.bind(this), i);
+    }
+  }
+
+  componentDidUpdate() {
+    this.handleWindowResize.bind(this);
   }
 
   handleOpenClick(v) {
@@ -28,11 +38,13 @@ class Map extends React.Component {
 
   handleWindowResize() {
     const m = this.mapRef.current;
-    const r = this.mapRef.current.getBoundingClientRect();
-    this.setState({
-      offset: [r.left, r.top],
-      ratio: r.width / m.naturalWidth
-    });
+    if(m != null) {
+      const r = m.getBoundingClientRect();
+      this.setState({
+        offset: [r.left, r.top],
+        ratio: r.width / m.naturalWidth
+      });
+    }
   }
 
   renderLink(vData, index, url) {
