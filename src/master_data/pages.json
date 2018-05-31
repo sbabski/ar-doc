@@ -1,20 +1,20 @@
 {
 	"id": "master",
-	"map": "map_1894.jpg",
+	"map": "toronto.png",
 	"links": [
 		{
 			"type": "link",
 			"url": "p1",
 			"name": "Abernathy",
 			"icon": "star.png",
-			"pos": [100, 100]
+			"pos": [844, 332]
 		},
 		{
 			"type": "link",
 			"url": "p2",
 			"name": "Bernard",
 			"icon": "star.png",
-			"pos": [500, 650]
+			"pos": [477, 82]
 		},
 		{
 			"type": "link",

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Chevrons from './Chevrons';
 
 class MasterMap extends React.Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class MasterMap extends React.Component {
 
   handleWindowResize() {
     const m = this.mapRef.current;
-    const r = this.mapRef.current.getBoundingClientRect();
+    const r = m.getBoundingClientRect();
     this.setState({
       offset: [r.left, r.top],
       ratio: r.width / m.naturalWidth
@@ -39,7 +40,9 @@ class MasterMap extends React.Component {
   renderLink(vData, index) {
     let icon = require('./master_data/' + vData['icon']);
     let pos = vData['pos'].map((v, i) => {
-      return v * this.state.ratio + this.state.offset[i];
+      let offset = this.state.offset[i];
+      if(i == 1) offset -= 24;
+      return v * this.state.ratio + offset;
     });
 
     return(
@@ -47,7 +50,7 @@ class MasterMap extends React.Component {
           id={vData['id']}
           className='video-open master'
           style={this.formatPos(pos)}>
-          <img src={icon} alt="X"/>
+          <i className="fa fa-map-marker" />
           <p>
             {vData['name']}
           </p>
@@ -66,6 +69,11 @@ class MasterMap extends React.Component {
           <img ref={this.mapRef} src={this.state.mapUrl} alt="" />
         </div>
         {links}
+        <Chevrons 
+          next={this.props.next}
+          prev={this.props.prev}
+          noHome={true}
+        />  
       </div>
     );
   }

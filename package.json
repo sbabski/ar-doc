@@ -2,7 +2,10 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://web.northeastern.edu/ar-doc/maps/",
   "dependencies": {
+    "express": "^4.16.3",
+    "font-awesome": "^4.7.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-player": "^1.6.0",
