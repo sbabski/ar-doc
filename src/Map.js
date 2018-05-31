@@ -1,6 +1,7 @@
 import React from 'react';
 import VideoPlayer from './VideoPlayer';
 import MapLink from './MapLink';
+import Chevrons from './Chevrons';
 
 class Map extends React.Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class Map extends React.Component {
   }
 
   handleOpenClick(v) {
-    this.setState({videoPlaying: v})
+    this.setState({videoPlaying: v});
   }
 
   handleWindowResize() {
@@ -92,6 +93,11 @@ class Map extends React.Component {
           <img ref={this.mapRef} src={require('./data' + this.state.id + this.state.mapUrl)} alt="" />
         </div>
         {videos}
+        <Chevrons 
+          next={this.props.data['next']}
+          prev={this.props.data['next']}
+          anyVideoPlaying={this.state.videoPlaying}
+        />
       </div>
     );
   }

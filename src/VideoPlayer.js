@@ -45,7 +45,9 @@ class VideoPlayer extends React.Component {
             playing={this.state.visible}
             controls={true}
           />
-          <div className="close" onClick={() => this.handleOpenClick(false)}>X</div>
+          <div className="close" onClick={() => this.handleOpenClick(false)}>
+            <i className="fa fa-close"></i>
+          </div>
         </div>
       </div>
     );

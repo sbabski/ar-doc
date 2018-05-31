@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Link, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+
 import './index.css';
+import 'font-awesome/css/font-awesome.min.css';
+
 import Map from './Map';
 import MasterMap from './MasterMap';
-import chevron from './chevron.png';
 
 class App extends React.Component {
   constructor(props) {
@@ -50,59 +52,22 @@ class App extends React.Component {
           <Route 
             exact path="/"
             render={() =>
-              <div>
-                <MasterMap
-                  globalData={d}
-                />
-                <Chevrons 
-                  next={dL[0]}
-                  prev={dL[dL.length - 1]}
-                  home={false}
-                />
-              </div>
+              <MasterMap
+                globalData={d}
+                next={dL[0]}
+                prev={dL[dL.length - 1]}
+              />
             }
           />
           <Route 
             path="/:name" 
             render={({match}) =>
-              <div>
-                <MapFinder
-                  data={d[match.params.name]}
-                />
-                <Chevrons 
-                  next={d[match.params.name]['next']}
-                  prev={d[match.params.name]['prev']}
-                  home={true}
-                />
-              </div>
+              <MapFinder
+                data={d[match.params.name]}
+              />
             }
           />
         </Switch>
-      </div>
-    );
-  }
-}
-
-class Chevrons extends React.Component {
-  renderChevron(pos, rev=false) {
-    const lower = pos.toLowerCase();
-    const text = <p>{pos}</p>;
-    const img = <img src={chevron} alt={lower}/>;
-
-    return(
-      <div className={"chevron " + lower}>
-        {rev ? img : text}
-        {rev ? text : img}
-      </div>
-    );
-  }
-
-  render() {
-    return(
-      <div id="nav">
-        <Link to={"/" + this.props.prev}>{this.renderChevron("Prev")}</Link>
-        <Link to={"/" + this.props.next}>{this.renderChevron("Next")}</Link>
-        {this.props.home && <Link to="/">{this.renderChevron("Home", true)}</Link>}
       </div>
     );
   }
