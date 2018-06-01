@@ -1,0 +1,102 @@
+{
+	"url": "profile",
+	"map": "toronto.png",
+	"name": "Profiles",
+	"altHome": {
+      "text": "View Derives",
+      "url": "derive",
+      "icon": "fa-map-signs"
+	},
+	"links": [
+		{
+			"type": "youtube",
+			"url": "https://youtu.be/Bh0eJJ4JT1o",
+			"name": "Alex Morgan",
+			"pos": [100, 100]
+		},
+		{
+			"type": "youtube",
+			"url": "https://youtu.be/zaCjIrzNkII",
+			"name": "Arielle Bishop",
+			"pos": [200, 100]
+		},
+		{
+			"type": "youtube",
+			"url": "https://youtu.be/ZW_hyaXKWmA",
+			"name": "Chase Broder",
+			"pos": [300, 100]
+		},
+		{
+			"type": "youtube",
+			"url": "https://youtu.be/P4laV7s0n0U",
+			"name": "Chase Herman",
+			"pos": [400, 100]
+		},
+		{
+			"type": "youtube",
+			"url": "https://youtu.be/vK6YjOA56us",
+			"name": "Connor Marquez",
+			"pos": [500, 100]
+		},
+		{
+			"type": "youtube",
+			"url": "https://youtu.be/M4G2MUNKcFc",
+			"name": "Emily Freed",
+			"pos": [600, 100]
+		},
+		{
+			"type": "youtube",
+			"url": "https://youtu.be/LYsfZDbc5kg",
+			"name": "Erin Mittman",
+			"pos": [700, 100]
+		},		
+		{
+			"type": "youtube",
+			"url": "https://youtu.be/2qn6cfDroc4",
+			"name": "Erin Wang",
+			"pos": [800, 100]
+		},		
+		{
+			"type": "youtube",
+			"url": "https://youtu.be/IoJ6elynK7g",
+			"name": "Hulda Zheng",
+			"pos": [100, 200]
+		},
+		{
+			"type": "youtube",
+			"url": "https://youtu.be/no65JkzJzpE",
+			"name": "Jason Chen",
+			"pos": [200, 200]
+		},		
+		{
+			"type": "youtube",
+			"url": "https://youtu.be/XYMPTzmgGFs",
+			"name": "Jerry Vogel",
+			"pos": [300, 200]
+		},		
+		{
+			"type": "youtube",
+			"url": "https://youtu.be/8U0TGcp9uDQ",
+			"name": "Liam Cristello",
+			"pos": [400, 200]
+		},		
+		{
+			"type": "youtube",
+			"url": "https://youtu.be/El1qz6OjLGI",
+			"name": "Madison Mitteness",
+			"pos": [500, 200]
+		},
+		{
+			"type": "youtube",
+			"url": "https://youtu.be/ksOXn25BB-8",
+			"name": "Ricky Coelho",
+			"pos": [600, 200]
+		},		
+		{
+			"type": "youtube",
+			"url": "https://youtu.be/JECQzVBg7fM",
+			"name": "Yangli Liu",
+			"pos": [700, 200]
+		}
+	]
+}

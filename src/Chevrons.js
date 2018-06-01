@@ -2,23 +2,30 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class Chevrons extends React.Component {
-  renderChevron(pos, cName) {
-    const lower = pos.toLowerCase();
 
-    return(
-      <div className={"chevron " + lower}>
-        <i className={"fa fa-4x " + cName}></i>
-        <p>{pos}</p>
-      </div>
-    );
+  formatLink(url, cName, text, icon) {
+    return (
+      <Link to={"/" + url}>
+        <div className={"chevron " + cName}>
+          <i className={"fa fa-4x " + icon}></i>
+          <p>{text}</p>
+        </div>
+      </Link>
+    ); 
   }
 
   render() {
+    const prev = this.props.prev ? this.formatLink(this.props.prev, "prev", "Prev", "fa-long-arrow-left") : null;
+    const next = this.props.next ? this.formatLink(this.props.next, "next", "Next", "fa-long-arrow-right") : null;
+    const topLink = this.props.altHome ?
+      this.formatLink(this.props.altHome.url, "home", this.props.altHome.text, this.props.altHome.icon) :
+      this.formatLink('', "home", "Home", "fa-long-arrow-up");
+
     return(
       <div id="nav" className={this.props.anyVideoPlaying ? "hidden" : undefined}>
-        <Link to={"/" + this.props.prev}>{this.renderChevron("Prev", "fa-long-arrow-left")}</Link>
-        <Link to={"/" + this.props.next}>{this.renderChevron("Next", "fa-long-arrow-right")}</Link>
-        {this.props.noHome || <Link to="/">{this.renderChevron("Home", "fa-long-arrow-up")}</Link>}
+        {prev}
+        {next}
+        {topLink}
       </div>
     );
   }

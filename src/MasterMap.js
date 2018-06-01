@@ -5,11 +5,10 @@ import Chevrons from './Chevrons';
 class MasterMap extends React.Component {
   constructor(props) {
     super(props);
-    const data = require('./master_data/pages.json');
     this.state = {
-      mapUrl: require('./master_data/' + data['map']),
-      linkList: data['links'],
-      id: '/' + data['id'] + '/',
+      mapUrl: require('./data/' + this.props.pageData['map']),
+      prefix: this.props.pageData['url'],
+      linkList: this.props.pageData['links'],
       offset: [0, 0],
       ratio: 1,
       resize: false
@@ -18,6 +17,8 @@ class MasterMap extends React.Component {
   }
 
   componentDidMount() {
+    document.title = this.props.pageData['name'];
+
     if(!this.state.resize) {
       window.addEventListener('resize', this.handleWindowResize.bind(this));
       this.setState({resize: true});
@@ -43,8 +44,14 @@ class MasterMap extends React.Component {
     };
   }
 
+  formatName(name) {
+    name = name.split(' ');
+    return name.reduce((accu, elem) => {
+      return accu === null ? [elem] : [...accu, <br/>, elem]
+    }, null);
+  }
+
   renderLink(vData, index) {
-    let icon = require('./master_data/' + vData['icon']);
     let pos = vData['pos'].map((v, i) => {
       let offset = this.state.offset[i];
       if(i == 1) offset -= 24;
@@ -52,14 +59,14 @@ class MasterMap extends React.Component {
     });
 
     return(
-      <Link to={vData['url']}
-          id={vData['id']}
-          className='video-open master'
-          style={this.formatPos(pos)}>
-          <i className="fa fa-map-marker" />
-          <p>
-            {vData['name']}
-          </p>
+      <Link 
+        to={this.state.prefix + '/' + vData['url']}
+        id={vData['id']}
+        className='video-open map-marker'
+        style={this.formatPos(pos)}
+      >
+        <i className="fa fa-map-marker" />
+        <p>{this.formatName(vData['name'])}</p>
       </Link>
     );
   }
@@ -76,9 +83,9 @@ class MasterMap extends React.Component {
         </div>
         {links}
         <Chevrons 
-          next={this.props.next}
-          prev={this.props.prev}
-          noHome={true}
+          next={this.state.prefix + '/' + this.props.next}
+          prev={this.state.prefix + '/' + this.props.prev}
+          altHome={this.props.altHome}
         />  
       </div>
     );

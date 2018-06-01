@@ -1,0 +1,109 @@
+{
+	"map": "toronto.png",
+	"prefix": "_derive",
+	"name": "Derives",
+	"url": "derive",
+	"altHome": {
+      "text": "View Profiles",
+      "url": "profile",
+      "icon": "fa-video-camera"
+	},
+	"links": [
+		{
+			"type": "link",
+			"url": "alex",
+			"name": "Alex Morgan",
+			"pos": [100, 100]
+		},
+		{
+			"type": "link",
+			"url": "arielle",
+			"name": "Arielle Bishop",
+			"pos": [200, 100]
+		},
+		{
+			"type": "link",
+			"url": "chaseb",
+			"name": "Chase Broder",
+			"pos": [300, 100]
+		},
+		{
+			"type": "link",
+			"url": "chaseh",
+			"name": "Chase Herman",
+			"pos": [400, 100]
+		},
+		{
+			"type": "link",
+			"url": "connor",
+			"name": "Connor Marquez",
+			"pos": [500, 100]
+		},
+		{
+			"type": "link",
+			"url": "emily",
+			"name": "Emily Freed",
+			"pos": [600, 100]
+		},
+		{
+			"type": "link",
+			"url": "erinm",
+			"name": "Erin Mittman",
+			"pos": [700, 100]
+		},		
+		{
+			"type": "link",
+			"url": "erinw",
+			"name": "Erin Wang",
+			"pos": [800, 100]
+		},		
+		{
+			"type": "link",
+			"url": "hulda",
+			"name": "Hulda Zheng",
+			"pos": [100, 200]
+		},
+		{
+			"type": "link",
+			"url": "jason",
+			"name": "Jason Chen",
+			"pos": [200, 200]
+		},		
+		{
+			"type": "link",
+			"url": "jerry",
+			"name": "Jerry Vogel",
+			"pos": [300, 200]
+		},		
+		{
+			"type": "link",
+			"url": "liam",
+			"name": "Liam Cristello",
+			"pos": [400, 200]
+		},		
+		{
+			"type": "link",
+			"url": "madison",
+			"name": "Madison Mitteness",
+			"pos": [500, 200]
+		},
+		{
+			"type": "link",
+			"url": "ricky",
+			"name": "Ricky Coelho",
+			"pos": [600, 200]
+		},		
+		{
+			"type": "link",
+			"url": "yangli",
+			"name": "Yangli Liu",
+			"pos": [700, 200]
+		},
+		{
+			"type": "link",
+			"url": "yanhao",
+			"name": "Yanhao Zhang",
+			"pos": [800, 200]
+		}
+	]
+}

@@ -1,7 +1,7 @@
 html, body {
   margin: 0;
   height: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
   font-family: sans-serif;
   color: #666
 }
@@ -37,7 +37,6 @@ html, body {
   font-family: sans-serif;
   font-size: 3rem;
   cursor: pointer;
-  line-height: 0;
 }
 
 .video-open {
@@ -47,20 +46,29 @@ html, body {
 .video-open img {
   width: 2em;
   height: 2em;
-  opacity: 0.5;
+  opacity: 0.75;
   -webkit-transition: opacity 0.25s;
   transition: opacity 0.25s;
 }
 
-.video-open img:hover {
+.video-open i {
+  color: white;
+  text-shadow: 2px 2px 2px black;
+  opacity: 0.75;
+  -webkit-transition: opacity 0.25s;
+  transition: opacity 0.25s;
+}
+
+.video-open img:hover, .video-open i:hover {
   opacity: 1;
 }
 
 .fullscreen-video .close {
   top: 0;
   right: 0;
-  color: #fff;
   padding: 0.25em;
+  color: white;
+  line-height: 0;
 }
 
 .chevron {
@@ -82,7 +90,7 @@ html, body {
   bottom: 0;
 }
 
-.chevron p, .master p {
+.chevron p, .map-marker p {
   text-align: center;
   font-weight: bold;
   color: black;
@@ -119,30 +127,29 @@ html, body {
 }
 
 
-.master {
+.map-marker {
   text-decoration: none;
   text-align: center;
   height: 1em;
 }
 
-.master p {
+.map-marker p {
   font-size: 0.4em;
   transition: opacity 0.25s;
   opacity: 0;
-  margin: 0.5em;
+  margin: 0;
 }
 
-.master i {
-  color: rgb(85, 20, 200);
+.map-marker i {
   color: #999;
-  text-shadow: 2px 2px 2px black;
+  opacity: 1;
 }
 
-.master:hover i {
+.map-marker i:hover {
   animation: bounce 0.5s infinite alternate;
 }
 
-.master:hover p {
+.map-marker i:hover + p {
   opacity: 1;
 }
 
@@ -151,8 +158,12 @@ html, body {
   to {transform: translateY(-5px);}
 }
 
-
 @media only screen and (max-width: 768px) {
+
+  body {
+    overflow: scroll;
+  }
+
   #map img {
     margin-top: 3em;
   }

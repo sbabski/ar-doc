@@ -1,14 +1,12 @@
 import React from 'react';
 import VideoPlayer from './VideoPlayer';
-import MapLink from './MapLink';
 import Chevrons from './Chevrons';
+import { Link } from 'react-router-dom';
 
 class Map extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mapUrl: this.props.data['map'],
-      vidList: this.props.data['videos'],
       id: '/' + this.props.data['id'] + '/',
       videoPlaying: false,
       offset: [0, 0],
@@ -19,6 +17,8 @@ class Map extends React.Component {
   }
 
   componentDidMount() {
+    document.title = this.props.data['name'];
+
     if(!this.state.resize) {
       window.addEventListener('resize', this.handleWindowResize.bind(this));
       this.setState({resize: true});
@@ -53,16 +53,44 @@ class Map extends React.Component {
       return v * this.state.ratio + this.state.offset[i];
     });
 
+    let openClass = "video-open";
+    if(this.state.videoPlaying) openClass += " hidden";
+
     return(
-      <MapLink
-        key={'link' + index}
-        id={'link' + index}
-        url={url}
-        icon={icon}
-        pos={pos}
-        newPage={true}
-        anyVideoPlaying={this.state.videoPlaying}
-      />
+      <div id={'link' + index}>
+        <div 
+          className={openClass} 
+          style={this.formatPos(pos)}>
+          <a href={url} target="default">
+            <img src={icon} alt="X"/>
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  formatPos(pos) {
+    return {
+      left: pos[0] + 'px',
+      top: pos[1] + 'px'
+    };
+  }
+
+  renderLinkDefault(vData, index, url) {
+    let pos = vData['pos'].map((v, i) => {
+      return v * this.state.ratio + this.state.offset[i];
+    });
+
+    return(
+      <Link 
+        to={url}
+        id={vData['id']}
+        className='video-open'
+        style={this.formatPos(pos)}
+        target={"default"}
+      >
+        <i className="fa fa-close" />
+      </Link>
     );
   }
 
@@ -85,29 +113,51 @@ class Map extends React.Component {
     );
   }
 
-  render() {
-    const videos = this.state.vidList.map((vData, index) => {
-      let url = vData['url'];
-
-      switch(vData['type']) {
-        case 'link':
-          return this.renderLink(vData, index, url);
-        case 'local':
-          url = require('./data' + this.state.id + url);
-        default:
-          return this.renderVideoPlayer(vData, index, url);
-      }
+  renderVideoPlayerDefault(vData, index, url) {
+    let pos = vData['pos'].map((v, i) => {
+      return v * this.state.ratio + this.state.offset[i];
     });
+
+    return(
+      <VideoPlayer
+        key={'video' + index}
+        id={'video' + index}
+        url={url}
+        pos={pos}
+        name={vData['name']}
+        onClick={v => this.handleOpenClick(v)}
+        anyVideoPlaying={this.state.videoPlaying}
+      />
+    );
+  }
+
+  render() {
+    let links;
+    if(this.props.data['links']) {
+      links = this.props.data['links'].map((vData, index) => {
+        let url = vData['url'];
+
+        switch(vData['type']) {
+          case 'link':
+            return this.renderLinkDefault(vData, index, url);
+          case 'local':
+            url = require('./data' + this.state.id + url);
+          default:
+            return this.renderVideoPlayerDefault(vData, index, url);
+        }
+      });
+    }
 
     return (
       <div>
         <div id="map">
-          <img ref={this.mapRef} src={require('./data' + this.state.id + this.state.mapUrl)} alt="" />
+          <img ref={this.mapRef} src={require('./data/' + this.props.data['map'])} alt="" />
         </div>
-        {videos}
+        {links}
         <Chevrons 
           next={this.props.data['next']}
-          prev={this.props.data['next']}
+          prev={this.props.data['prev']}
+          altHome={this.props.data['altHome']}
           anyVideoPlaying={this.state.videoPlaying}
         />
       </div>
