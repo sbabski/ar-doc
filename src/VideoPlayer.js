@@ -38,7 +38,7 @@ class VideoPlayer extends React.Component {
 
     const icon = this.props.icon ? 
       <img src={this.props.icon} alt="X"/> :
-      <i className="fa fa-map-marker" />;
+      <i className="fa fa-map-marker"/>;
 
     const name = this.props.name ? <p>{this.formatName(this.props.name)}</p> : null;
 

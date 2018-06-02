@@ -1,8 +1,8 @@
 {
-  "name": "my-app",
+  "name": "maps",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://web.northeastern.edu/ar-doc/maps/",
+  "homepage": "/maps",
   "dependencies": {
     "express": "^4.16.3",
     "font-awesome": "^4.7.0",

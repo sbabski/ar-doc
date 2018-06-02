@@ -1,13 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import VideoPlayer from './VideoPlayer';
 import Chevrons from './Chevrons';
-import { Link } from 'react-router-dom';
 
 class Map extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: '/' + this.props.data['id'] + '/',
+      mapUrl: require('./data/' + this.props.data['map']),
       videoPlaying: false,
       offset: [0, 0],
       ratio: 1,
@@ -23,6 +23,7 @@ class Map extends React.Component {
       window.addEventListener('resize', this.handleWindowResize.bind(this));
       this.setState({resize: true});
     }
+
     for(var i = 0; i < 10; i++) {
       setTimeout(this.handleWindowResize.bind(this), i);
     }
@@ -48,7 +49,7 @@ class Map extends React.Component {
   }
 
   renderLink(vData, index, url) {
-    let icon = require('./data' + this.state.id + vData['icon']);
+    let icon = require('./data' + vData['icon']);
     let pos = vData['pos'].map((v, i) => {
       return v * this.state.ratio + this.state.offset[i];
     });
@@ -76,6 +77,13 @@ class Map extends React.Component {
     };
   }
 
+  formatName(name) {
+    name = name.split(' ');
+    return name.reduce((accu, elem) => {
+      return accu === null ? [elem] : [...accu, <br/>, elem]
+    }, null);
+  }
+
   renderLinkDefault(vData, index, url) {
     let pos = vData['pos'].map((v, i) => {
       return v * this.state.ratio + this.state.offset[i];
@@ -94,8 +102,29 @@ class Map extends React.Component {
     );
   }
 
+  
+  renderLinkMapMarker(vData, index) {
+    let pos = vData['pos'].map((v, i) => {
+      let offset = this.state.offset[i];
+      if(i == 1) offset -= 24;
+      return v * this.state.ratio + offset;
+    });
+
+    return(
+      <Link 
+        to={this.state.prefix + '/' + vData['url']}
+        id={vData['id']}
+        className='video-open map-marker'
+        style={this.formatPos(pos)}
+      >
+        <i className="fa fa-map-marker" />
+        <p>{this.formatName(vData['name'])}</p>
+      </Link>
+    );
+  }
+
   renderVideoPlayer(vData, index, url) {
-    let icon = require('./data' + this.state.id + vData['icon']);
+    let icon = require('./data' + vData['icon']);
     let pos = vData['pos'].map((v, i) => {
       return v * this.state.ratio + this.state.offset[i];
     });
@@ -141,7 +170,7 @@ class Map extends React.Component {
           case 'link':
             return this.renderLinkDefault(vData, index, url);
           case 'local':
-            url = require('./data' + this.state.id + url);
+            url = require('./data' + url);
           default:
             return this.renderVideoPlayerDefault(vData, index, url);
         }
@@ -151,7 +180,7 @@ class Map extends React.Component {
     return (
       <div>
         <div id="map">
-          <img ref={this.mapRef} src={require('./data/' + this.props.data['map'])} alt="" />
+          <img ref={this.mapRef} src={this.state.mapUrl} alt="" />
         </div>
         {links}
         <Chevrons 

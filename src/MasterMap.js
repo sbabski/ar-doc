@@ -6,9 +6,7 @@ class MasterMap extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mapUrl: require('./data/' + this.props.pageData['map']),
-      prefix: this.props.pageData['url'],
-      linkList: this.props.pageData['links'],
+      mapUrl: require('./data/' + this.props.data['map']),
       offset: [0, 0],
       ratio: 1,
       resize: false
@@ -17,13 +15,16 @@ class MasterMap extends React.Component {
   }
 
   componentDidMount() {
-    document.title = this.props.pageData['name'];
+    document.title = this.props.data['name'];
 
     if(!this.state.resize) {
       window.addEventListener('resize', this.handleWindowResize.bind(this));
       this.setState({resize: true});
     }
-    setTimeout(this.handleWindowResize.bind(this), 1);
+
+    for(var i = 0; i < 10; i++) {
+      setTimeout(this.handleWindowResize.bind(this), i);
+    }
   }
 
   handleWindowResize() {
@@ -51,7 +52,7 @@ class MasterMap extends React.Component {
     }, null);
   }
 
-  renderLink(vData, index) {
+  renderLinkMapMarker(vData, index) {
     let pos = vData['pos'].map((v, i) => {
       let offset = this.state.offset[i];
       if(i == 1) offset -= 24;
@@ -60,8 +61,7 @@ class MasterMap extends React.Component {
 
     return(
       <Link 
-        to={this.state.prefix + '/' + vData['url']}
-        id={vData['id']}
+        to={vData['url']}
         className='video-open map-marker'
         style={this.formatPos(pos)}
       >
@@ -72,8 +72,8 @@ class MasterMap extends React.Component {
   }
 
   render() {
-    const links = this.state.linkList.map((x, i) => {
-      return this.renderLink(x, i);
+    const links = this.props.data['links'].map((x, i) => {
+      return this.renderLinkMapMarker(x, i);
     });
 
     return (
@@ -83,8 +83,8 @@ class MasterMap extends React.Component {
         </div>
         {links}
         <Chevrons 
-          next={this.state.prefix + '/' + this.props.next}
-          prev={this.state.prefix + '/' + this.props.prev}
+          next={this.props.next}
+          prev={this.props.prev}
           altHome={this.props.altHome}
         />  
       </div>

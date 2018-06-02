@@ -1,8 +1,8 @@
 {
+	"url": "derive",
 	"map": "toronto.png",
 	"prefix": "_derive",
 	"name": "Derives",
-	"url": "derive",
 	"altHome": {
       "text": "View Profiles",
       "url": "profile",

@@ -43,6 +43,7 @@ class MapHandler extends React.Component {
       const d = data[list[i]];
       d['next'] = prefix + list[(i + 1) % len];
       d['prev'] = prefix + list[((i - 1) + len) % len];
+      d['url'] = prefix + d['url'];
     }
     return list;
   }
@@ -58,10 +59,9 @@ class MapHandler extends React.Component {
             exact path={"/" + this.state.url}
             render={() =>
               <MasterMap
-                pageData={this.state.pageData}
-                globalData={d}
-                next={dL[0]}
-                prev={dL[dL.length - 1]}
+                data={this.state.pageData}
+                next={this.state.pageData['url'] + '/' + dL[0]}
+                prev={this.state.pageData['url'] + '/' + dL[dL.length - 1]}
                 altHome={this.state.pageData['altHome']}
               />
             }
@@ -90,7 +90,7 @@ class MapFinder extends React.Component {
     } else {
       return(
         <Map
-          key={this.props.data['id']}
+          key={this.props.data['url']}
           data={this.props.data}
         />
       );
