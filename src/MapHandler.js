@@ -10,15 +10,25 @@ import MasterMap from './MasterMap';
 class MapHandler extends React.Component {
   constructor(props) {
     super(props);
-    const pageData = require('./data/' + this.props.json + '.json');
-    const masterData = this.importRelevant(pageData);
+    const pageData = this.importPageData();
     const url = pageData['url'] + '/';
+    const masterData = this.importRelevant(pageData);
+
     this.state = {
       pageData: pageData,
       url: url,
       data: masterData,
       dataList: this.createDataList(masterData, url)
     };
+  }
+
+  importPageData() {
+    const data = require('./data/' + this.props.json + '.json');
+    const prefix = data['url'] + '/';
+    data['links'].map((x) => {
+      x['prefix'] = prefix;
+    });
+    return data;
   }
 
   importRelevant(r) {
@@ -43,7 +53,6 @@ class MapHandler extends React.Component {
       const d = data[list[i]];
       d['next'] = prefix + list[(i + 1) % len];
       d['prev'] = prefix + list[((i - 1) + len) % len];
-      d['url'] = prefix + d['url'];
     }
     return list;
   }

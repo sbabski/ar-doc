@@ -61,7 +61,7 @@ class MasterMap extends React.Component {
 
     return(
       <Link 
-        to={vData['url']}
+        to={(vData['prefix'] || '') + vData['url']}
         className='video-open map-marker'
         style={this.formatPos(pos)}
       >
