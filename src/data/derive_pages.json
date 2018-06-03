@@ -12,98 +12,114 @@
 		{
 			"type": "link",
 			"url": "alex",
+			"icon": "fa-map-marker",
 			"name": "Alex Morgan",
-			"pos": [100, 100]
+			"pos": [50, 470]
 		},
 		{
 			"type": "link",
 			"url": "arielle",
+			"icon": "fa-map-marker",
 			"name": "Arielle Bishop",
-			"pos": [200, 100]
+			"pos": [725, 382]
 		},
 		{
 			"type": "link",
 			"url": "chaseb",
+			"icon": "fa-map-marker",
 			"name": "Chase Broder",
-			"pos": [300, 100]
+			"pos": [532, 370]
 		},
 		{
 			"type": "link",
 			"url": "chaseh",
+			"icon": "fa-map-marker",
 			"name": "Chase Herman",
-			"pos": [400, 100]
+			"pos": [875, 282]
 		},
 		{
 			"type": "link",
 			"url": "connor",
+			"icon": "fa-map-marker",
 			"name": "Connor Marquez",
-			"pos": [500, 100]
+			"pos": [172, 536]
 		},
 		{
 			"type": "link",
 			"url": "emily",
+			"icon": "fa-map-marker",
 			"name": "Emily Freed",
-			"pos": [600, 100]
+			"pos": [858, 285]
 		},
 		{
 			"type": "link",
 			"url": "erinm",
+			"icon": "fa-map-marker",
 			"name": "Erin Mittman",
-			"pos": [700, 100]
+			"pos": [775, 368]
 		},		
 		{
 			"type": "link",
 			"url": "erinw",
+			"icon": "fa-map-marker",
 			"name": "Erin Wang",
-			"pos": [800, 100]
+			"pos": [880, 212]
 		},		
 		{
 			"type": "link",
 			"url": "hulda",
+			"icon": "fa-map-marker",
 			"name": "Hulda Zheng",
-			"pos": [100, 200]
+			"pos": [702, 425]
 		},
 		{
 			"type": "link",
 			"url": "jason",
+			"icon": "fa-map-marker",
 			"name": "Jason Chen",
-			"pos": [200, 200]
+			"pos": [865, 218]
 		},		
 		{
 			"type": "link",
 			"url": "jerry",
+			"icon": "fa-map-marker",
 			"name": "Jerry Vogel",
-			"pos": [300, 200]
+			"pos": [100, 100]
 		},		
 		{
 			"type": "link",
 			"url": "liam",
+			"icon": "fa-map-marker",
 			"name": "Liam Cristello",
-			"pos": [400, 200]
+			"pos": [555, 382]
 		},		
 		{
 			"type": "link",
 			"url": "madison",
+			"icon": "fa-map-marker",
 			"name": "Madison Mitteness",
-			"pos": [500, 200]
+			"pos": [220, 520]
 		},
 		{
 			"type": "link",
 			"url": "ricky",
+			"icon": "fa-map-marker",
 			"name": "Ricky Coelho",
-			"pos": [600, 200]
+			"pos": [550, 320]
 		},		
 		{
 			"type": "link",
 			"url": "yangli",
+			"icon": "fa-map-marker",
 			"name": "Yangli Liu",
-			"pos": [700, 200]
+			"pos": [30, 390]
 		},
 		{
 			"type": "link",
 			"url": "yanhao",
+			"icon": "fa-map-marker",
 			"name": "Yanhao Zhang",
-			"pos": [800, 200]
+			"pos": [582, 360]
 		}
 	]
 }

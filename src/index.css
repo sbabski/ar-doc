@@ -41,25 +41,35 @@ html, body {
 
 .video-open {
   transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 
-.video-open img {
-  width: 2em;
-  height: 2em;
+.video-open img, .video-open i {
   opacity: 0.75;
   -webkit-transition: opacity 0.25s;
   transition: opacity 0.25s;
+  pointer-events: initial;
+}
+
+.video-open img {
+  max-width: 1em;
+  max-height: 1em;
 }
 
 .video-open i {
   color: white;
   text-shadow: 2px 2px 2px black;
-  opacity: 0.75;
-  -webkit-transition: opacity 0.25s;
-  transition: opacity 0.25s;
+}
+
+.video-open:hover {
+  z-index: 1;
 }
 
 .video-open img:hover, .video-open i:hover {
+  opacity: 1;
+}
+
+.video-open i:hover + p, .video-open img:hover + p {
   opacity: 1;
 }
 
@@ -147,10 +157,6 @@ html, body {
 
 .map-marker i:hover {
   animation: bounce 0.5s infinite alternate;
-}
-
-.map-marker i:hover + p {
-  opacity: 1;
 }
 
 @keyframes bounce {

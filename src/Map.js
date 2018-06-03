@@ -51,7 +51,8 @@ class Map extends React.Component {
   renderLink(vData, index, url) {
     let icon = require('./data' + vData['icon']);
     let pos = vData['pos'].map((v, i) => {
-      return v * this.state.ratio + this.state.offset[i];
+      let offset = this.state.offset[i];
+      return v * this.state.ratio + offset;
     });
 
     let openClass = "video-open";
@@ -106,7 +107,7 @@ class Map extends React.Component {
   renderLinkMapMarker(vData, index) {
     let pos = vData['pos'].map((v, i) => {
       let offset = this.state.offset[i];
-      if(i == 1) offset -= 24;
+      if(i === 1) offset -= 24;
       return v * this.state.ratio + offset;
     });
 
@@ -126,7 +127,9 @@ class Map extends React.Component {
   renderVideoPlayer(vData, index, url) {
     let icon = require('./data' + vData['icon']);
     let pos = vData['pos'].map((v, i) => {
-      return v * this.state.ratio + this.state.offset[i];
+      let offset = this.state.offset[i];
+      if(i === 1) offset -= 24;
+      return v * this.state.ratio + offset;
     });
 
     return(
@@ -144,7 +147,9 @@ class Map extends React.Component {
 
   renderVideoPlayerDefault(vData, index, url) {
     let pos = vData['pos'].map((v, i) => {
-      return v * this.state.ratio + this.state.offset[i];
+      let offset = this.state.offset[i];
+      if(i === 1) offset -= 24;
+      return v * this.state.ratio + offset;
     });
 
     return(
@@ -168,7 +173,7 @@ class Map extends React.Component {
 
         switch(vData['type']) {
           case 'link':
-            return this.renderLinkDefault(vData, index, url);
+            return this.renderLinkMapMarker(vData, index, url);
           case 'local':
             url = require('./data' + url);
           default:

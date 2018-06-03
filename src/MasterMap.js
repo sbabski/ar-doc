@@ -38,13 +38,6 @@ class MasterMap extends React.Component {
     }
   }
 
-  formatPos(pos) {
-    return {
-      left: pos[0] + 'px',
-      top: pos[1] + 'px'
-    };
-  }
-
   formatName(name) {
     name = name.split(' ');
     return name.reduce((accu, elem) => {
@@ -52,28 +45,50 @@ class MasterMap extends React.Component {
     }, null);
   }
 
-  renderLinkMapMarker(vData, index) {
-    let pos = vData['pos'].map((v, i) => {
+  formatPos(pos, adjust) {
+    const map = pos.map((v, i) => {
       let offset = this.state.offset[i];
-      if(i == 1) offset -= 24;
+      offset += adjust[i];
       return v * this.state.ratio + offset;
     });
 
+    return {
+      left: map[0] + 'px',
+      top: map[1] + 'px'
+    };
+  }
+
+  renderLink(vData, icon, adjust=[0,0]) {
     return(
       <Link 
         to={(vData['prefix'] || '') + vData['url']}
         className='video-open map-marker'
-        style={this.formatPos(pos)}
+        style={this.formatPos(vData['pos'], adjust)}
       >
-        <i className="fa fa-map-marker" />
+        {icon}
         <p>{this.formatName(vData['name'])}</p>
       </Link>
     );
   }
 
+  renderImageIcon(icon) {
+    return <img src={require('./data/' + icon)}/>;
+  }
+
+  renderIcon(icon) {
+    return <i className={"fa " + icon} />;
+  }
+
   render() {
     const links = this.props.data['links'].map((x, i) => {
-      return this.renderLinkMapMarker(x, i);
+      const icon = x['icon'];
+      if(!icon) 
+        return this.renderLink(x, this.renderIcon('fa-close'));
+      if(icon === 'fa-map-marker')
+        return this.renderLink(x, this.renderIcon(icon), [0, -24]);
+      if(icon.substring(0, 3) === 'fa-')
+        return this.renderLink(x, this.renderIcon(icon));
+      return this.renderLink(x, this.renderImageIcon(icon));
     });
 
     return (
