@@ -94,6 +94,10 @@ html, body {
   line-height: 0;
 }
 
+.chevron.home {
+  right: 0;
+}
+
 .chevron.prev {
   left: 0;
   bottom: 0;
