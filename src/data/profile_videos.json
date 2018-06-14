@@ -78,14 +78,7 @@
 			"icon": "fa-map-marker",
 			"name": "Jason Chen",
 			"pos": [898, 224]
-		},		
-		{
-			"type": "youtube",
-			"url": "https://youtu.be/XYMPTzmgGFs",
-			"icon": "fa-map-marker",
-			"name": "Jerry Vogel",
-			"pos": [-100, -100]
-		},		
+		},			
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/8U0TGcp9uDQ",
@@ -120,6 +113,13 @@
 			"icon": "fa-map-marker",
 			"name": "Yanhao Zhang",
 			"pos": [159, 284]
-		}
+		},		
+		{
+			"type": "youtube",
+			"url": "https://youtu.be/XYMPTzmgGFs",
+			"icon": "fa-map-marker",
+			"name": "Jerry Vogel",
+			"pos": [-100, -100]
+		}	
 	]
 }
