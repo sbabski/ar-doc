@@ -114,6 +114,11 @@ html, body {
   color: black;
 }
 
+.map-marker > p {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 0.1em;
+}
+
 .chevron p {
   margin: 0;
   transition: opacity 0.25s;
