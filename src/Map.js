@@ -32,7 +32,7 @@ class Map extends React.Component {
     if(m != null) {
       const r = m.getBoundingClientRect();
 
-      if(m.width == 0) {
+      if(m.width === 0) {
         setTimeout(this.handleWindowResize.bind(this), 1);
       } else {
         this.setState({
@@ -44,10 +44,11 @@ class Map extends React.Component {
   }
 
   formatName(name) {
+    if(!name) return null;
     name = name.split(' ');
-    return name.reduce((accu, elem) => {
+    return (<p>{name.reduce((accu, elem) => {
       return accu === null ? [elem] : [...accu, <br/>, elem]
-    }, null);
+    }, null)}</p>);
   }
 
   formatPos(pos, adjust) {
@@ -80,9 +81,6 @@ class Map extends React.Component {
     const icon = x['icon'];
     const key = 'video' + i;
 
-    let url = x['url'];
-    if(x['type'] === 'local') url = require('./data' + url);
-
     let adjust = [0, 0];
     let renderIcon;
     if(!icon) {
@@ -94,27 +92,11 @@ class Map extends React.Component {
       renderIcon = this.renderImageIcon(icon, i);
     }
 
-    return this.renderVideo(url, key, x['name'], renderIcon, this.formatPos(x['pos'], adjust));
+    return this.renderVideo(x, key, renderIcon, this.formatPos(x['pos'], adjust));
   }
 
-  renderLink(vData, icon, target, adjust=[0,0]) {
-    let className = 'video-open map-marker';
-    if(this.state.videoPlaying) className += ' hidden';
-    return(
-      <Link 
-        to={(vData['prefix'] || '') + vData['url']}
-        className={className}
-        style={this.formatPos(vData['pos'], adjust)}
-        target={target}
-      >
-        {icon}
-        <p>{this.formatName(vData['name'])}</p>
-      </Link>
-    );
-  }
-
-  renderImageIcon(icon) {
-    return <img src={require('./data/' + icon)}/>;
+  renderImageIcon(icon, index) {
+    return <img src={require('./data/' + icon)} alt={index + 1}/>;
   }
 
   renderIcon(icon, index) {
@@ -125,7 +107,34 @@ class Map extends React.Component {
     );
   }
 
-  renderVideo(url, key, name, renderIcon, pos) {
+  renderLink(x, icon, target, adjust=[0,0]) {
+    let className = 'video-open map-marker';
+    if(this.state.videoPlaying) className += ' hidden';
+
+    const name = this.formatName(x['name']);
+
+    return(
+      <Link 
+        to={(x['prefix'] || '') + x['url']}
+        className={className}
+        style={this.formatPos(x['pos'], adjust)}
+        target={target}
+      >
+        {icon}
+        {name}
+      </Link>
+    );
+  }
+
+  renderVideo(x, key, renderIcon, pos) {
+    let className = 'video-open map-marker';
+    if(this.state.videoPlaying) className += ' hidden';
+
+    const name = this.formatName(x['name']);
+
+    let url = x['url'];
+    if(x['type'] === 'local') url = require('./data' + url);
+    
     return(
       <VideoPlayer
         key={key}
@@ -135,6 +144,7 @@ class Map extends React.Component {
         pos={pos}
         name={name}
         onClick={v => this.handleOpenClick(v)}
+        markerClass={className}
         anyVideoPlaying={this.state.videoPlaying}
       />
     );

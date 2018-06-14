@@ -24,7 +24,7 @@ class MapHandler extends React.Component {
   importPageData() {
     const data = require('./data/' + this.props.json + '.json');
     const prefix = data['url'] + '/';
-    data['links'].map((x) => {
+    data['links'].map((x) => {  
       x['prefix'] = prefix;
     });
     return data;
@@ -65,7 +65,7 @@ class MapHandler extends React.Component {
           <Route 
             exact path={"/" + this.state.url}
             render={() =>
-              <MasterMap2
+              <MasterMap
                 data={this.state.pageData}
                 first={dL[0]}
                 last={dL[dL.length - 1]}
@@ -89,7 +89,7 @@ class MapHandler extends React.Component {
 
 export default MapHandler;
 
-class MasterMap2 extends React.Component {
+class MasterMap extends React.Component {
   constructor(props) {
     super(props);
     const url = this.props.data['url'] + '/';
@@ -99,12 +99,7 @@ class MasterMap2 extends React.Component {
   }
 
   render() {
-    const url = this.props.data['url'] + '/';
-    return(
-      <Map
-        data={this.state}
-      />
-    );
+    return <Map data={this.state}/>;
   }
 }
 

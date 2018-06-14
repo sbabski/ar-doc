@@ -10,13 +10,6 @@
 	},
 	"links": [
 		{
-			"type": "link-tab",
-			"url": "https://nytimes.com",
-			"icon": "fa-map-marker",
-			"name": "Alex Morgan",
-			"pos": [50, 470]
-		},
-		{
 			"type": "youtube",
 			"url": "https://youtu.be/Bh0eJJ4JT1o",
 			"icon": "fa-map-marker",

@@ -14,13 +14,6 @@ class VideoPlayer extends React.Component {
     this.props.onClick(v);
   }
 
-  formatName(name) {
-    name = name.split(' ');
-    return name.reduce((accu, elem) => {
-      return accu === null ? [elem] : [...accu, <br/>, elem]
-    }, null);
-  }
-
   render() {
     let vidClass = "fullscreen-video";
     let openClass = "video-open map-marker";
@@ -28,16 +21,14 @@ class VideoPlayer extends React.Component {
     if(!this.state.visible) vidClass += " hidden";
     if(this.props.anyVideoPlaying) openClass += " hidden";
 
-    const name = this.props.name ? <p>{this.formatName(this.props.name)}</p> : null;
-
     return (
       <div id={this.props.id}>
         <div 
-          className={openClass} 
+          className={this.props.markerClass} 
           onClick={() => this.handleOpenClick(true)}
           style={this.props.pos}>
           {this.props.icon}
-          {name}
+          {this.props.name}
         </div>
         <div className={vidClass}>
           <ReactPlayer
