@@ -31,7 +31,6 @@ class Map extends React.Component {
     const m = this.mapRef.current;
     if(m != null) {
       const r = m.getBoundingClientRect();
-      console.log(r);
 
       if(m.width == 0) {
         setTimeout(this.handleWindowResize.bind(this), 1);
@@ -44,36 +43,6 @@ class Map extends React.Component {
     }
   }
 
-  renderLink(vData, index, url) {
-    let icon = require('./data' + vData['icon']);
-    let pos = vData['pos'].map((v, i) => {
-      let offset = this.state.offset[i];
-      return v * this.state.ratio + offset;
-    });
-
-    let openClass = "video-open";
-    if(this.state.videoPlaying) openClass += " hidden";
-
-    return(
-      <div id={'link' + index}>
-        <div 
-          className={openClass} 
-          style={this.formatPos(pos)}>
-          <a href={url} target="default">
-            <img src={icon} alt="X"/>
-          </a>
-        </div>
-      </div>
-    );
-  }
-
-  formatPos(pos) {
-    return {
-      left: pos[0] + 'px',
-      top: pos[1] + 'px'
-    };
-  }
-
   formatName(name) {
     name = name.split(' ');
     return name.reduce((accu, elem) => {
@@ -81,80 +50,90 @@ class Map extends React.Component {
     }, null);
   }
 
-  renderLinkDefault(vData, index, url) {
-    let pos = vData['pos'].map((v, i) => {
-      return v * this.state.ratio + this.state.offset[i];
-    });
-
-    return(
-      <Link 
-        to={url}
-        id={vData['id']}
-        className='video-open'
-        style={this.formatPos(pos)}
-        target={"default"}
-      >
-        <i className="fa fa-close" />
-      </Link>
-    );
-  }
-
-  
-  renderLinkMapMarker(vData, index) {
-    let pos = vData['pos'].map((v, i) => {
+  formatPos(pos, adjust) {
+    const map = pos.map((v, i) => {
       let offset = this.state.offset[i];
-      if(i === 1) offset -= 24;
+      offset += adjust[i];
       return v * this.state.ratio + offset;
     });
 
+    return {
+      left: map[0] + 'px',
+      top: map[1] + 'px'
+    };
+  }
+
+  formatLink(x, i) {
+    const target = x['type'].includes('tab') ? '_blank' : '';
+
+    const icon = x['icon'];
+    if(!icon) 
+      return this.renderLink(x, this.renderIcon('fa-close', i), target);
+    if(icon === 'fa-map-marker')
+      return this.renderLink(x, this.renderIcon(icon, i), target, [0, -24]);
+    if(icon.substring(0, 3) === 'fa-')
+      return this.renderLink(x, this.renderIcon(icon, i), target);
+    return this.renderLink(x, this.renderImageIcon(icon, i), target);
+  }
+
+  formatVideo(x, i) {
+    const icon = x['icon'];
+    const key = 'video' + i;
+
+    let url = x['url'];
+    if(x['type'] === 'local') url = require('./data' + url);
+
+    let adjust = [0, 0];
+    let renderIcon;
+    if(!icon) {
+      renderIcon = this.renderIcon('fa-close', i);
+    } else if(icon.substring(0, 3) === 'fa-') {
+      renderIcon =  this.renderIcon(icon, i);
+      if(icon === 'fa-map-marker') adjust = [0, -24];
+    } else {
+      renderIcon = this.renderImageIcon(icon, i);
+    }
+
+    return this.renderVideo(url, key, x['name'], renderIcon, this.formatPos(x['pos'], adjust));
+  }
+
+  renderLink(vData, icon, target, adjust=[0,0]) {
+    let className = 'video-open map-marker';
+    if(this.state.videoPlaying) className += ' hidden';
     return(
       <Link 
-        to={this.state.prefix + '/' + vData['url']}
-        id={vData['id']}
-        className='video-open map-marker'
-        style={this.formatPos(pos)}
+        to={(vData['prefix'] || '') + vData['url']}
+        className={className}
+        style={this.formatPos(vData['pos'], adjust)}
+        target={target}
       >
-        <i className="fa fa-map-marker" />
+        {icon}
         <p>{this.formatName(vData['name'])}</p>
       </Link>
     );
   }
 
-  renderVideoPlayer(vData, index, url) {
-    let icon = require('./data' + vData['icon']);
-    let pos = vData['pos'].map((v, i) => {
-      let offset = this.state.offset[i];
-      if(i === 1) offset -= 24;
-      return v * this.state.ratio + offset;
-    });
+  renderImageIcon(icon) {
+    return <img src={require('./data/' + icon)}/>;
+  }
 
+  renderIcon(icon, index) {
     return(
-      <VideoPlayer
-        key={'video' + index}
-        id={'video' + index}
-        url={url}
-        icon={icon}
-        pos={pos}
-        onClick={v => this.handleOpenClick(v)}
-        anyVideoPlaying={this.state.videoPlaying}
-      />
+      <i className={"fa " + icon}>
+        {this.props.data['numbered'] && <span>{index + 1}</span>}
+      </i>
     );
   }
 
-  renderVideoPlayerDefault(vData, index, url) {
-    let pos = vData['pos'].map((v, i) => {
-      let offset = this.state.offset[i];
-      if(i === 1) offset -= 24;
-      return v * this.state.ratio + offset;
-    });
-
+  renderVideo(url, key, name, renderIcon, pos) {
     return(
       <VideoPlayer
-        key={'video' + index}
-        id={'video' + index}
+        key={key}
+        id={key}
         url={url}
+        icon={renderIcon}
         pos={pos}
-        name={vData['name']}
+        name={name}
         onClick={v => this.handleOpenClick(v)}
         anyVideoPlaying={this.state.videoPlaying}
       />
@@ -168,17 +147,8 @@ class Map extends React.Component {
   render() {
     let links;
     if(this.props.data['links']) {
-      links = this.props.data['links'].map((vData, index) => {
-        let url = vData['url'];
-
-        switch(vData['type']) {
-          case 'link':
-            return this.renderLinkMapMarker(vData, index, url);
-          case 'local':
-            url = require('./data' + url);
-          default:
-            return this.renderVideoPlayerDefault(vData, index, url);
-        }
+      links = this.props.data['links'].map((x, i) => {
+        return x['type'].includes('link') ? this.formatLink(x, i) : this.formatVideo(x, i);
       });
     }
 

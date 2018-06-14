@@ -1,6 +1,7 @@
 {
 	"url": "profile",
 	"map": "toronto_videos.png",
+	"numbered": true,
 	"name": "Profiles",
 	"altHome": {
       "text": "View Derives",
@@ -9,98 +10,121 @@
 	},
 	"links": [
 		{
+			"type": "link-tab",
+			"url": "https://nytimes.com",
+			"icon": "fa-map-marker",
+			"name": "Alex Morgan",
+			"pos": [50, 470]
+		},
+		{
 			"type": "youtube",
 			"url": "https://youtu.be/Bh0eJJ4JT1o",
+			"icon": "fa-map-marker",
 			"name": "Alex Morgan",
 			"pos": [288, 859]
 		},
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/zaCjIrzNkII",
+			"icon": "fa-map-marker",
 			"name": "Arielle Bishop",
 			"pos": [349, 579]
 		},
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/ZW_hyaXKWmA",
+			"icon": "fa-map-marker",
 			"name": "Chase Broder",
 			"pos": [1736, 106]
 		},
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/P4laV7s0n0U",
+			"icon": "fa-map-marker",
 			"name": "Chase Herman",
 			"pos": [114, 770]
 		},
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/vK6YjOA56us",
+			"icon": "fa-map-marker",
 			"name": "Connor Marquez",
 			"pos": [338, 984]
 		},
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/M4G2MUNKcFc",
+			"icon": "fa-map-marker",
 			"name": "Emily Freed",
 			"pos": [1687, 241]
 		},
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/LYsfZDbc5kg",
+			"icon": "fa-map-marker",
 			"name": "Erin Mittmann",
 			"pos": [988, 167]
 		},		
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/2qn6cfDroc4",
+			"icon": "fa-map-marker",
 			"name": "Erin Wang",
 			"pos": [196, 722]
 		},		
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/IoJ6elynK7g",
+			"icon": "fa-map-marker",
 			"name": "Hulda Zheng",
 			"pos": [279, 798]
 		},
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/no65JkzJzpE",
+			"icon": "fa-map-marker",
 			"name": "Jason Chen",
 			"pos": [898, 224]
 		},		
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/XYMPTzmgGFs",
+			"icon": "fa-map-marker",
 			"name": "Jerry Vogel",
-			"pos": [100, 100]
+			"pos": [-100, -100]
 		},		
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/8U0TGcp9uDQ",
+			"icon": "fa-map-marker",
 			"name": "Liam Cristello",
 			"pos": [868, 326]
 		},		
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/El1qz6OjLGI",
+			"icon": "fa-map-marker",
 			"name": "Madison Mitteness",
 			"pos": [359, 804]
 		},
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/ksOXn25BB-8",
+			"icon": "fa-map-marker",
 			"name": "Ricky Coelho",
 			"pos": [791, 255]
 		},		
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/JECQzVBg7fM",
+			"icon": "fa-map-marker",
 			"name": "Yangli Liu",
 			"pos": [208, 767]
 		},
 		{
 			"type": "youtube",
-			"url": "https://youtu.be/",
+			"url": "https://youtu.be/dF_xGqQoFj4",
+			"icon": "fa-map-marker",
 			"name": "Yanhao Zhang",
 			"pos": [159, 284]
 		}

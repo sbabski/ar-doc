@@ -5,7 +5,6 @@ import './index.css';
 import 'font-awesome/css/font-awesome.min.css';
 
 import Map from './Map';
-import MasterMap from './MasterMap';
 
 class MapHandler extends React.Component {
   constructor(props) {
@@ -58,7 +57,6 @@ class MapHandler extends React.Component {
   }
 
   render() {
-    const d = this.state.data;
     const dL = this.state.dataList;
     
     return (
@@ -67,11 +65,10 @@ class MapHandler extends React.Component {
           <Route 
             exact path={"/" + this.state.url}
             render={() =>
-              <MasterMap
+              <MasterMap2
                 data={this.state.pageData}
-                next={this.state.pageData['url'] + '/' + dL[0]}
-                prev={this.state.pageData['url'] + '/' + dL[dL.length - 1]}
-                altHome={this.state.pageData['altHome']}
+                first={dL[0]}
+                last={dL[dL.length - 1]}
               />
             }
           />
@@ -79,7 +76,7 @@ class MapHandler extends React.Component {
             path={'/' + this.state.url + ':name'}
             render={({match}) =>
               <MapFinder
-                data={d[match.params.name]}
+                data={this.state.data[match.params.name]}
                 prefix={this.state.url}
               />
             }
@@ -91,6 +88,25 @@ class MapHandler extends React.Component {
 }
 
 export default MapHandler;
+
+class MasterMap2 extends React.Component {
+  constructor(props) {
+    super(props);
+    const url = this.props.data['url'] + '/';
+    this.state = this.props.data;
+    this.state.next = url + this.props.first;
+    this.state.prev = url + this.props.last;
+  }
+
+  render() {
+    const url = this.props.data['url'] + '/';
+    return(
+      <Map
+        data={this.state}
+      />
+    );
+  }
+}
 
 class MapFinder extends React.Component {
   render() {

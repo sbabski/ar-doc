@@ -163,6 +163,17 @@ html, body {
   animation: bounce 0.5s infinite alternate;
 }
 
+.map-marker i span {
+  color: black;
+  font-family: sans-serif;
+  font-size: 0.25em;
+  text-shadow: none;
+  position: absolute;
+  left: 50%;
+  top: 75%;
+  transform: translate(-50%, -50%);
+}
+
 @keyframes bounce {
   from {transform: translateY(0px);}
   to {transform: translateY(-5px);}

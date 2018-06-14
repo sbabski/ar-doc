@@ -26,6 +26,7 @@ class App extends React.Component {
               <Map data={require('./data/profile_videos.json')}/>
             }
           />
+          <Redirect to="/"/>
         </Switch>
       </BrowserRouter>
     );
