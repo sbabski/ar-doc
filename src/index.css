@@ -112,10 +112,10 @@ html, body {
   text-align: center;
   font-weight: bold;
   color: black;
+  padding: 0.1em;
 }
 
-.map-marker > p {
-  background-color: rgba(255, 255, 255, 0.5);
+.map-marker p {
   padding: 0.1em;
 }
 
@@ -123,6 +123,7 @@ html, body {
   margin: 0;
   transition: opacity 0.25s;
   opacity: 0;
+  padding: 0.25em;
 }
 
 .chevron:hover p {
