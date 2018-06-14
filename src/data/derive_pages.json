@@ -13,6 +13,7 @@
 		{
 			"type": "link",
 			"url": "alex",
+			"name": "Alex Morgan",
 			"icon": "fa-map-marker",
 			"pos": [50, 470]
 		},
