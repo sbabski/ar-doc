@@ -1,6 +1,6 @@
 {
 	"url": "profile",
-	"map": "toronto.png",
+	"map": "toronto_videos.png",
 	"name": "Profiles",
 	"altHome": {
       "text": "View Derives",
@@ -12,91 +12,97 @@
 			"type": "youtube",
 			"url": "https://youtu.be/Bh0eJJ4JT1o",
 			"name": "Alex Morgan",
-			"pos": [100, 100]
+			"pos": [288, 859]
 		},
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/zaCjIrzNkII",
 			"name": "Arielle Bishop",
-			"pos": [200, 100]
+			"pos": [349, 579]
 		},
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/ZW_hyaXKWmA",
 			"name": "Chase Broder",
-			"pos": [300, 100]
+			"pos": [1736, 106]
 		},
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/P4laV7s0n0U",
 			"name": "Chase Herman",
-			"pos": [400, 100]
+			"pos": [114, 770]
 		},
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/vK6YjOA56us",
 			"name": "Connor Marquez",
-			"pos": [500, 100]
+			"pos": [338, 984]
 		},
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/M4G2MUNKcFc",
 			"name": "Emily Freed",
-			"pos": [600, 100]
+			"pos": [1687, 241]
 		},
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/LYsfZDbc5kg",
-			"name": "Erin Mittman",
-			"pos": [700, 100]
+			"name": "Erin Mittmann",
+			"pos": [988, 167]
 		},		
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/2qn6cfDroc4",
 			"name": "Erin Wang",
-			"pos": [800, 100]
+			"pos": [196, 722]
 		},		
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/IoJ6elynK7g",
 			"name": "Hulda Zheng",
-			"pos": [100, 200]
+			"pos": [279, 798]
 		},
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/no65JkzJzpE",
 			"name": "Jason Chen",
-			"pos": [200, 200]
+			"pos": [898, 224]
 		},		
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/XYMPTzmgGFs",
 			"name": "Jerry Vogel",
-			"pos": [300, 200]
+			"pos": [100, 100]
 		},		
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/8U0TGcp9uDQ",
 			"name": "Liam Cristello",
-			"pos": [400, 200]
+			"pos": [868, 326]
 		},		
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/El1qz6OjLGI",
 			"name": "Madison Mitteness",
-			"pos": [500, 200]
+			"pos": [359, 804]
 		},
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/ksOXn25BB-8",
 			"name": "Ricky Coelho",
-			"pos": [600, 200]
+			"pos": [791, 255]
 		},		
 		{
 			"type": "youtube",
 			"url": "https://youtu.be/JECQzVBg7fM",
 			"name": "Yangli Liu",
-			"pos": [700, 200]
+			"pos": [208, 767]
+		},
+		{
+			"type": "youtube",
+			"url": "https://youtu.be/",
+			"name": "Yanhao Zhang",
+			"pos": [159, 284]
 		}
 	]
 }

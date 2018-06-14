@@ -24,27 +24,23 @@ class Map extends React.Component {
       this.setState({resize: true});
     }
 
-    for(var i = 0; i < 10; i++) {
-      setTimeout(this.handleWindowResize.bind(this), i);
-    }
-  }
-
-  componentDidUpdate() {
-    this.handleWindowResize.bind(this);
-  }
-
-  handleOpenClick(v) {
-    this.setState({videoPlaying: v});
+    this.handleWindowResize();
   }
 
   handleWindowResize() {
     const m = this.mapRef.current;
     if(m != null) {
       const r = m.getBoundingClientRect();
-      this.setState({
-        offset: [r.left, r.top],
-        ratio: r.width / m.naturalWidth
-      });
+      console.log(r);
+
+      if(m.width == 0) {
+        setTimeout(this.handleWindowResize.bind(this), 1);
+      } else {
+        this.setState({
+          offset: [r.left, r.top],
+          ratio: r.width / m.naturalWidth
+        });
+      }
     }
   }
 
@@ -163,6 +159,10 @@ class Map extends React.Component {
         anyVideoPlaying={this.state.videoPlaying}
       />
     );
+  }
+
+  handleOpenClick(v) {
+    this.setState({videoPlaying: v});
   }
 
   render() {

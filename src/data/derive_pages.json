@@ -55,7 +55,7 @@
 			"type": "link",
 			"url": "erinm",
 			"icon": "fa-map-marker",
-			"name": "Erin Mittman",
+			"name": "Erin Mittmann",
 			"pos": [775, 368]
 		},		
 		{
@@ -63,7 +63,7 @@
 			"url": "erinw",
 			"icon": "fa-map-marker",
 			"name": "Erin Wang",
-			"pos": [880, 212]
+			"pos": [880, 213]
 		},		
 		{
 			"type": "link",

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import VideoPlayer from './VideoPlayer';
 import Chevrons from './Chevrons';
 
 class MasterMap extends React.Component {
@@ -7,6 +8,7 @@ class MasterMap extends React.Component {
     super(props);
     this.state = {
       mapUrl: require('./data/' + this.props.data['map']),
+      videoPlaying: false,
       offset: [0, 0],
       ratio: 1,
       resize: false
@@ -22,19 +24,23 @@ class MasterMap extends React.Component {
       this.setState({resize: true});
     }
 
-    for(var i = 0; i < 10; i++) {
-      setTimeout(this.handleWindowResize.bind(this), i);
-    }
+    this.handleWindowResize();
   }
 
   handleWindowResize() {
     const m = this.mapRef.current;
     if(m != null) {
       const r = m.getBoundingClientRect();
-      this.setState({
-        offset: [r.left, r.top],
-        ratio: r.width / m.naturalWidth
-      });
+      console.log(r);
+
+      if(m.width == 0) {
+        setTimeout(this.handleWindowResize.bind(this), 1);
+      } else {
+        this.setState({
+          offset: [r.left, r.top],
+          ratio: r.width / m.naturalWidth
+        });
+      }
     }
   }
 
@@ -101,6 +107,7 @@ class MasterMap extends React.Component {
           next={this.props.next}
           prev={this.props.prev}
           altHome={this.props.altHome}
+          anyVideoPlaying={this.state.videoPlaying}
         />  
       </div>
     );
